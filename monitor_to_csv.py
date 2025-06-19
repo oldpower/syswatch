@@ -5,7 +5,7 @@ import csv
 import os
 
 # CSV 文件名
-CSV_FILENAME = "system_monitor_log.csv"
+CSV_FILENAME = "./log/system_monitor_log.csv"
 if os.path.exists(CSV_FILENAME):
     os.remove(CSV_FILENAME)
 # 获取所有 GPU 当前状态

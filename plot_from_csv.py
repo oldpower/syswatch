@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
-CSV_FILENAME = "system_monitor_log.csv"
+CSV_FILENAME = "./log/system_monitor_log.csv"
 
 def plot_data():
     if not os.path.exists(CSV_FILENAME):
@@ -51,7 +51,7 @@ def plot_data():
     plt.xlabel("Time")
     plt.xticks(rotation=45)
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-    plt.savefig("./assets/system_usage_plot.png", dpi=300, bbox_inches='tight')
+    # plt.savefig("./assets/system_usage_plot.png", dpi=300, bbox_inches='tight')
     plt.show()
 
 if __name__ == "__main__":
