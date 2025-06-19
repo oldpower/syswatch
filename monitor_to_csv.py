@@ -3,6 +3,7 @@ import GPUtil
 import time
 import csv
 import os
+import sys
 
 # CSV 文件名
 CSV_FILENAME = "./log/system_monitor_log.csv"
@@ -83,4 +84,16 @@ def monitor_system(interval=1, num_gpus=8):
         print("\n监控已停止。CSV 文件保存为:", CSV_FILENAME)
 
 if __name__ == "__main__":
+    args = sys.argv[1:]
+    if len(args) == 1:
+        filename = args[0]
+        if filename.lower().endswith('.csv'):
+            CSV_FILENAME = filename
+            print(f"📁csv存放路径:{CSV_FILENAME}")
+        else:
+            print(f"🔔未输入有效的csv文件名称，参考示例：python monitor_to_csv.py ./log/syswatch.csv")
+            sys.exit(1)
+    else:
+        print(f"🔔未输入有效的csv文件名称，默认存放路径:{CSV_FILENAME}")
+
     monitor_system(num_gpus=8)

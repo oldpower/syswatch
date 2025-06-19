@@ -17,12 +17,15 @@ pip install psutil gputil matplotlib pandas -i https://pypi.mirrors.ustc.edu.cn/
 ### 2. 监控脚本
 **显卡数量在`num_gpus`参数设置**
 ```bash
-$ python monitor_to_csv.py
+$ python monitor_to_csv.py ./log/syswatchlog.csv
 [2025-06-19 16:24:18] CPU: 49.2%, MEM: 54.7%, GPU1: Load=80.0%, Mem=21799.0 MB, GPU2: Load=67.0%, Mem=20253.0 MB, GPU3: Load=79.0%, Mem=20147.0 MB, GPU4: Load=82.0%, Mem=19795.0 MB, GPU5: Load=0.0%, Mem=18.0 MB, GPU6: Load=0.0%, Mem=18.0 MB, GPU7: Load=0.0%, Mem=18.0 MB, GPU8: Load=0.0%, Mem=18.0 MB
+...
+📁csv存放路径:./log/syswatchlog.csv
 ```
 ### 3. 绘图脚本
 ```bash
-python plot_from_csv.py
+$ python plot_from_csv.py ./log/syswatchlog.csv
+📁csv文件路径:./log/syswatchlog.csv
 ```
 **📊 结果**
 ![plot](./assets/system_usage_plot.png)

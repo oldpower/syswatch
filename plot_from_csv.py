@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import sys
 
 CSV_FILENAME = "./log/system_monitor_log.csv"
 
@@ -55,4 +56,15 @@ def plot_data():
     plt.show()
 
 if __name__ == "__main__":
+    args = sys.argv[1:]
+    if len(args) == 1:
+        filename = args[0]
+        if filename.lower().endswith('.csv'):
+            CSV_FILENAME = filename
+            print(f"📁csv文件路径:{CSV_FILENAME}")
+        else:
+            print(f"🔔未输入有效的csv文件名称，参考示例：python monitor_to_csv.py ./log/syswatch.csv")
+            sys.exit(1)
+    else:
+        print(f"🔔未输入有效的csv文件名称，默认文件路径:{CSV_FILENAME}")
     plot_data()
