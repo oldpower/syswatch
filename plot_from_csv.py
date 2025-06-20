@@ -27,11 +27,13 @@ def plot_data():
     axes[0].plot(df['Timestamp'], df['CPU (%)'], color='tab:blue')
     axes[0].set_ylabel("CPU (%)")
     axes[0].grid(True)
+    axes[0].set_ylim(0, 100)
 
     # 子图 2: 内存使用率
     axes[1].plot(df['Timestamp'], df['Memory (%)'], color='tab:orange')
     axes[1].set_ylabel("Memory (%)")
     axes[1].grid(True)
+    axes[1].set_ylim(0, 100)
 
     # 动态添加每个 GPU 的数据
     for i in range(num_gpus):
@@ -42,6 +44,7 @@ def plot_data():
         axes[2 + i * 2].plot(df['Timestamp'], df[load_col], color='tab:green')
         axes[2 + i * 2].set_ylabel(f"{load_col}\n(%)", rotation=0, labelpad=40)
         axes[2 + i * 2].grid(True)
+        axes[2 + i * 2].set_ylim(0, 100)
 
         # GPU 显存使用
         axes[3 + i * 2].plot(df['Timestamp'], df[mem_col], color='tab:red')
