@@ -43,7 +43,47 @@ nohup /usr/bin/ollama serve &
 pass
 ```
 
-#### 1.5 ollama使用
+#### 1.5 ollama模型下载路径
+**默认路径通常在**
+
+    ~/.ollama/models
+    /usr/share/ollama/.ollama/models
+
+**更换路径（方式1 通过环境变量检查）**
+```bash
+# 1. 查看当前下载路径
+# Ollama 允许通过环境变量 OLLAMA_MODELS 自定义模型路径
+echo $OLLAMA_MODELS
+# 如果是通过 systemd 管理的 Ollama 服务，检查服务配置文件中是否指定了路径：
+sudo cat /etc/systemd/system/ollama.service | grep OLLAMA_MODELS
+
+# 2. 临时生效
+export OLLAMA_MODELS=/your/custom/path  # 例如 export OLLAMA_MODELS=/mnt/ssd/models
+ollama serve  # 重启服务使生效
+
+# 永久生效（添加到 shell 配置文件如 ~/.bashrc 或 ~/.zshrc
+echo 'export OLLAMA_MODELS=/your/custom/path' >> ~/.bashrc
+source ~/.bashrc
+```
+
+
+**更换路径（方式2 修改 systemd 服务文件）**
+```bash
+# 1. 修改systemed文件
+sudo vim /etc/systemd/system/ollama.service
+# 在 [Service] 部分添加环境变量：
+Environment="OLLAMA_MODELS=/your/custom/path"
+
+# 2. 重新加载配置并重启服务：
+sudo systemctl daemon-reload
+sudo systemctl restart ollama
+
+# 3. 迁移现有模型,例如当前路径/usr/share/ollama/.ollama/models
+sudo mkdir -p /your/custom/path
+sudo cp -r /usr/share/ollama/.ollama/models/* /your/custom/path/
+sudo chown -R $(whoami):$(whoami) /your/custom/path  # 确保当前用户有权限
+```
+#### 1.6 ollama使用
 
 | 命令 |	作用 |
 | - | - |
