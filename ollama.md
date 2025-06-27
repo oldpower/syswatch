@@ -41,6 +41,8 @@ nohup /usr/bin/ollama serve &
 #### 1.4 重启ollama（方式2）
 ```bash
 pass
+sudo systemctl daemon-reload
+sudo systemctl restart ollama
 ```
 
 #### 1.5 ollama模型下载路径
@@ -73,6 +75,8 @@ source ~/.bashrc
 sudo vim /etc/systemd/system/ollama.service
 # 在 [Service] 部分添加环境变量：
 Environment="OLLAMA_MODELS=/your/custom/path"
+# 如果想开放ip
+Environment="OLLAMA_HOST=0.0.0.0:11434"
 
 # 2. 重新加载配置并重启服务：
 sudo systemctl daemon-reload
